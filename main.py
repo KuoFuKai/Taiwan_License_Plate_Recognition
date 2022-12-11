@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 
 extension = '.jpg'
-imagePath = '../images/0808-GY.jpg'
-patternsPath = '../solid_patterns/'
+imagePath = 'images/0808-GY.jpg'
+patternsPath = 'solid_patterns/'
 
 # 取出車牌 Getting License Plate
 rawImage = cv2.cvtColor(np.array(cv2.imread(imagePath)), cv2.COLOR_RGB2BGR)
@@ -26,14 +26,12 @@ for contour in contours:  # 遍歷取得的輪廓
 letter_images = []
 for letter in sorted(letters, key=lambda s: s[0], reverse=False):  # 重新安排號碼順序遍歷
     letter_images.append(plateImage[letter[1]:letter[1] + letter[3], letter[0]:letter[0] + letter[2]])  # 將過濾過的輪廓使用原圖裁切
-"""
 # show文字裁切成果(可選) Showing License Plate Number (optional)
 from matplotlib import pyplot as plt
 for i, j in enumerate(letter_images):
     plt.subplot(1, len(letter_images), i + 1)
     plt.imshow(letter_images[i], cmap='gray')
 plt.show()
-"""
 
 # 匹配車牌文字 Matching License Plate Number
 results = []
